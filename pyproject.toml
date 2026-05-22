@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "imagemorphing"
+version = "0.1.0"
+description = "Interactive Python image morphing tools with a reusable processing pipeline."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "dash>=2.17,<3.0",
+    "dash-cytoscape>=1.0,<2.0",
+    "imageio>=2.34,<3.0",
+    "matplotlib>=3.8,<4.0",
+    "numpy>=1.26,<3.0",
+    "opencv-python>=4.10,<5.0",
+    "Pillow>=10.0,<12.0",
+    "psutil>=5.9,<8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0,<9.0",
+    "ruff>=0.6,<0.7",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

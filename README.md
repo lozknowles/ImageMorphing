@@ -4,7 +4,7 @@
 
 ## Current Status
 
-This repository is best described as a prototype / experimental project rather than a packaged production app. It contains:
+This repository started as a prototype and now has a cleaner package structure around the core workflow. It contains:
 
 - a main interactive morphing tool
 - a resize / overlay adjustment helper
@@ -12,18 +12,23 @@ This repository is best described as a prototype / experimental project rather t
 - sample source images
 - generated media artifacts kept locally but excluded from Git
 
-## Main Scripts
+## Project Structure
 
-- `image_morpher.py`: primary interactive image morphing workflow
-- `resize.py`: drag / scroll overlay adjustment and save helper
-- `affine.py`, `affine2.py`, `affine3.py`: affine-transform experiments
-- `morph.py`, `keypointmorph.py`: alternative morphing experiments
+- `image_morpher.py`: stable entry point for the primary interactive morphing workflow
+- `resize.py`: stable entry point for the overlay adjustment helper
+- `imagemorphing/config.py`: application configuration dataclasses
+- `imagemorphing/image_ops.py`: image loading, resizing, alignment, and blending helpers
+- `imagemorphing/pipeline.py`: orchestration for frame generation and export
+- `imagemorphing/ui.py`: Matplotlib-based morphing UI
+- `imagemorphing/overlay_ui.py`: Matplotlib-based overlay adjustment UI
+- `imagemorphing/point_selection.py`: reusable point-pair state management
 - `collage.py`: GIF collage generation helper
-- `perf.py`: unrelated Dash-based system monitor experiment currently kept in the repo
+- `experiments/`: archived prototype and side-experiment scripts moved out of the supported app surface
+- `tests/`: lightweight tests for core non-UI behavior
 
 ## Requirements
 
-The project does not ship with a lockfile or environment manager, so the dependencies below are inferred from repository imports:
+The project now includes both `requirements.txt` and `pyproject.toml`. The dependency list is still lightweight and inferred from repository imports plus test tooling:
 
 - `opencv-python`
 - `numpy`
@@ -33,11 +38,24 @@ The project does not ship with a lockfile or environment manager, so the depende
 - `psutil`
 - `dash`
 - `dash-cytoscape`
+- `pytest`
 
-Install them with:
+Install runtime dependencies with:
 
 ```bash
 python -m pip install -r requirements.txt
+```
+
+For development, including tests:
+
+```bash
+python -m pip install -r requirements-dev.txt
+```
+
+Or, if you want to work from the package metadata:
+
+```bash
+python -m pip install -e .[dev]
 ```
 
 ## How To Run
@@ -46,6 +64,25 @@ Run the main app from the project root:
 
 ```bash
 python image_morpher.py --base_image before.jpg --surrogate_image after.jpg --output_folder morph_output
+```
+
+You can also treat the core logic as importable modules from the `imagemorphing` package rather than only as top-level scripts.
+
+## Quality Workflow
+
+- `pyproject.toml` defines package metadata and pytest settings.
+- `requirements.txt` contains runtime dependencies.
+- `requirements-dev.txt` layers test tooling on top of runtime dependencies.
+- `.github/workflows/ci.yml` runs install, compile, and test checks on GitHub Actions.
+- Current automated tests focus on config validation, point selection rules, CLI parsing behavior, and pipeline orchestration via mocks.
+- `scripts/dev.ps1` provides local developer tasks for install, lint, format, test, and combined checks.
+
+Example local commands:
+
+```powershell
+./scripts/dev.ps1 install
+./scripts/dev.ps1 check
+./scripts/dev.ps1 run-morph --base_image before.jpg --surrogate_image after.jpg
 ```
 
 Then:
@@ -73,13 +110,14 @@ A basic repository scan was performed before publication for common secrets such
 ## Known Limitations
 
 - The app relies on manual point selection and has no automated matching in the main workflow.
-- There are no automated tests in the repository.
+- Test coverage is still light and currently focuses on non-UI logic.
 - There is no packaged installer, CLI release flow, or reproducible environment file beyond `requirements.txt`.
-- `perf.py` appears to be unrelated to the image morphing workflow and may be a side experiment.
+- The `experiments/` folder is intentionally not treated as production-grade code.
 
 ## Repo Notes
 
 - Generated media is intentionally excluded from version control.
 - Sample source images remain in the repository.
-- This repo was prepared for public publication by adding documentation, dependency listing, and basic guard-rail fixes in the Python scripts.
-
+- The core app has been refactored away from script-level globals into reusable package modules.
+- Runtime and development dependencies are now split for cleaner maintenance.
+- Prototype scripts have been moved into `experiments/` to keep the main surface area clearer.

@@ -10,6 +10,9 @@ Thumbs.db
 .venv/
 venv/
 env/
+.pytest_cache/
+.ruff_cache/
+pytest-cache-files-*/
 
 morph_output/
 gifs/morph_*.gif
