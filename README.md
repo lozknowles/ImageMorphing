@@ -93,7 +93,14 @@ Example local commands:
 ./scripts/dev.ps1 check
 ./scripts/dev.ps1 run-morph --base_image before.jpg --surrogate_image after.jpg
 ./scripts/dev.ps1 run-auto --base_image before.jpg --surrogate_image after.jpg
+./scripts/release.ps1 0.2.0
 ```
+
+Versioning helper:
+
+- `scripts/release.ps1 <MAJOR.MINOR.PATCH>` updates `pyproject.toml` and seeds a dated changelog section.
+- Add `-CreateTag` to create `v<version>`.
+- Add `-Push` with `-CreateTag` to push the tag after creation.
 
 Then:
 

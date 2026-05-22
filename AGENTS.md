@@ -15,6 +15,7 @@ This repository contains a local Python image morphing prototype with a few help
 - If adding dependencies, update `requirements.txt` and `README.md` together.
 - If adding development tooling, update `requirements-dev.txt`, `pyproject.toml`, and CI config together.
 - If changing the local developer workflow, keep `scripts/dev.ps1` and `README.md` in sync.
+- If changing release/versioning flow, keep `scripts/release.ps1`, `README.md`, and release workflow docs aligned.
 - If changing behavior, update `CHANGELOG.md` in the same edit.
 
 ## Repo Notes

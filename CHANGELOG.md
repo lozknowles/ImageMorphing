@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 - Added `scripts/dev.ps1` as a local developer task runner.
 - Added `auto_morph.py` and `imagemorphing/automatic.py` to promote automatic ORB-based morphing from experiments into the supported app surface.
 - Added a GitHub release workflow that builds distributions on version tags or manual dispatch.
+- Added `scripts/release.ps1` to help manage semantic version bumps and release tags.
 
 ### Changed
 

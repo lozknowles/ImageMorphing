@@ -1,6 +1,6 @@
 param(
     [Parameter(Position = 0)]
-    [ValidateSet("install", "lint", "format", "test", "check", "run-morph", "run-resize", "run-auto")]
+    [ValidateSet("install", "lint", "format", "test", "check", "run-morph", "run-resize", "run-auto", "release-help")]
     [string]$Task = "check"
 )
 
@@ -45,6 +45,9 @@ try {
         }
         "run-auto" {
             & $python auto_morph.py @args[1..($args.Length - 1)]
+        }
+        "release-help" {
+            Write-Output "Use ./scripts/release.ps1 <MAJOR.MINOR.PATCH> [-CreateTag] [-Push]"
         }
     }
 }
