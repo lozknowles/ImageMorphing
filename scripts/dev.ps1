@@ -1,6 +1,6 @@
 param(
     [Parameter(Position = 0)]
-    [ValidateSet("install", "lint", "format", "test", "check", "run-morph", "run-resize")]
+    [ValidateSet("install", "lint", "format", "test", "check", "run-morph", "run-resize", "run-auto")]
     [string]$Task = "check"
 )
 
@@ -42,6 +42,9 @@ try {
         }
         "run-resize" {
             & $python resize.py @args[1..($args.Length - 1)]
+        }
+        "run-auto" {
+            & $python auto_morph.py @args[1..($args.Length - 1)]
         }
     }
 }

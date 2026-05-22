@@ -16,7 +16,9 @@ This repository started as a prototype and now has a cleaner package structure a
 
 - `image_morpher.py`: stable entry point for the primary interactive morphing workflow
 - `resize.py`: stable entry point for the overlay adjustment helper
+- `auto_morph.py`: supported automatic morphing entry point using ORB feature matching
 - `imagemorphing/config.py`: application configuration dataclasses
+- `imagemorphing/automatic.py`: automatic ORB-based morphing pipeline promoted from experiments
 - `imagemorphing/image_ops.py`: image loading, resizing, alignment, and blending helpers
 - `imagemorphing/pipeline.py`: orchestration for frame generation and export
 - `imagemorphing/ui.py`: Matplotlib-based morphing UI
@@ -66,6 +68,12 @@ Run the main app from the project root:
 python image_morpher.py --base_image before.jpg --surrogate_image after.jpg --output_folder morph_output
 ```
 
+Automatic ORB-based workflow:
+
+```bash
+python auto_morph.py --base_image before.jpg --surrogate_image after.jpg --output_folder morph_output
+```
+
 You can also treat the core logic as importable modules from the `imagemorphing` package rather than only as top-level scripts.
 
 ## Quality Workflow
@@ -74,6 +82,7 @@ You can also treat the core logic as importable modules from the `imagemorphing`
 - `requirements.txt` contains runtime dependencies.
 - `requirements-dev.txt` layers test tooling on top of runtime dependencies.
 - `.github/workflows/ci.yml` runs install, compile, and test checks on GitHub Actions.
+- `.github/workflows/release.yml` builds distributions and publishes a GitHub release on version tags or manual dispatch.
 - Current automated tests focus on config validation, point selection rules, CLI parsing behavior, and pipeline orchestration via mocks.
 - `scripts/dev.ps1` provides local developer tasks for install, lint, format, test, and combined checks.
 
@@ -83,6 +92,7 @@ Example local commands:
 ./scripts/dev.ps1 install
 ./scripts/dev.ps1 check
 ./scripts/dev.ps1 run-morph --base_image before.jpg --surrogate_image after.jpg
+./scripts/dev.ps1 run-auto --base_image before.jpg --surrogate_image after.jpg
 ```
 
 Then:
@@ -110,6 +120,7 @@ A basic repository scan was performed before publication for common secrets such
 ## Known Limitations
 
 - The app relies on manual point selection and has no automated matching in the main workflow.
+- The automatic ORB-based workflow is now supported, but it remains less controllable than the manual point-selection path.
 - Test coverage is still light and currently focuses on non-UI logic.
 - There is no packaged installer, CLI release flow, or reproducible environment file beyond `requirements.txt`.
 - The `experiments/` folder is intentionally not treated as production-grade code.

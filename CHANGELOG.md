@@ -19,6 +19,8 @@ All notable changes to this project will be documented in this file.
 - Added `ruff`-based lint and format checks for the maintained code paths.
 - Added mocked pipeline smoke tests.
 - Added `scripts/dev.ps1` as a local developer task runner.
+- Added `auto_morph.py` and `imagemorphing/automatic.py` to promote automatic ORB-based morphing from experiments into the supported app surface.
+- Added a GitHub release workflow that builds distributions on version tags or manual dispatch.
 
 ### Changed
 
