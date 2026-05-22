@@ -1,0 +1,8 @@
+opencv-python
+numpy
+matplotlib
+imageio
+Pillow
+psutil
+dash
+dash-cytoscape

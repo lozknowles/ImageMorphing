@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIF Collage</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: #f0f0f0;
+        }
+        .gif-container {
+            margin: 5px;
+        }
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+        <div class="gif-container">
+            <img src="community.png" alt="community.gif" data-gif="community.gif" class="gif"/>
+        </div>
+
+        <div class="gif-container">
+            <img src="morph_1.png" alt="morph_1.gif" data-gif="morph_1.gif" class="gif"/>
+        </div>
+
+        <div class="gif-container">
+            <img src="morph_before.png" alt="morph_before.gif" data-gif="morph_before.gif" class="gif"/>
+        </div>
+
+        <div class="gif-container">
+            <img src="morph_green2.png" alt="morph_green2.gif" data-gif="morph_green2.gif" class="gif"/>
+        </div>
+
+        <div class="gif-container">
+            <img src="morph_police2.png" alt="morph_police2.gif" data-gif="morph_police2.gif" class="gif"/>
+        </div>
+
+<script>
+    document.querySelectorAll('.gif').forEach(img => {
+        const gifSrc = img.getAttribute('data-gif');
+        const staticSrc = img.getAttribute('src');
+        img.addEventListener('mouseover', () => {
+            img.setAttribute('src', gifSrc);  // Play the GIF on hover
+        });
+        img.addEventListener('mouseout', () => {
+            img.setAttribute('src', staticSrc);  // Show static image when not hovered
+        });
+    });
+</script>
+</body>
+</html>
